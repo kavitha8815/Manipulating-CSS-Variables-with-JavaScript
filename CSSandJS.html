@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h2>Update CSS Variables with<span class="h1"> JS</h2> 
+
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+        <label for="base">Base color</label>
+        <input type="color" name="base" value="ffc600">
+
+        <label for="brightness">Brightness:</label>
+<input id="brightness" type="range" name="brightness" min="0.5" max="2" value="1" step="0.1" data-sizing="">
+    </div>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZK83mTltk8yEjIYtLQXnPQHaEo%26pid%3DApi&f=1&ipt=e3d9e94a624e107b2eea6d55013463328099f62cbd35a8665847734e6363b197&ipo=images">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+
+        }
+        
+        img{
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+            transition: all 0.3s ease;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .h1{
+            color: var(--base);
+        }
+        body{
+            text-align: center;
+            background: #193549;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 100;
+            cursor: url('https://example.com/cursor.png'), auto;
+        }
+        .controls{
+            margin-bottom: 50px;
+        }
+        input{
+            width: 100px;
+        }
+    </style>
+
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+
+        function handleUpdate(){
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value+suffix)
+        }
+
+        inputs.forEach(input=> input.addEventListener('change', handleUpdate));
+        inputs.forEach(input=> input.addEventListener('mousemove', handleUpdate));
+    </script>
+</body>
+</html>
